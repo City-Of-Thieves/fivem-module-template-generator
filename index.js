@@ -41,54 +41,80 @@ function customize() {
         name: 'language',
       },
       {
-        type: 'confirm',
-        message: 'Are you creating a UI?',
-        name: 'html',
-      },
-      {
-        type: 'confirm',
-        message: 'Are you writing any Javascript?',
-        name: 'js',
-      },
-      {
-        type: 'confirm',
-        message: 'Will you need need a .css file?',
-        name: 'css',
-        when(answers) {
-          return answers.html === true;
-        }
-      },
-      {
-        type: 'input',
-        message: 'What is the name of the module?',
-        name: 'moduleName',
+        type: 'checkbox',
+        message: 'What additional files will you need created?',
+        choices: ['html', 'css', 'js'],
+        name: 'fileChoice',
       }
     ])
     .then((answers) => {
-      if (answers.html) makeDirectoryPath(answers);
+      makeDirectoryPath(answers)
     })
 }
 
 
 
 function makeDirectoryPath(answers) {
-  const { html, js, css } = answers;
+  const { fileChoice, moduleName } = answers
   fs.mkdir(path.join(__dirname, `fivem-${answers.moduleName}`), err => err ? console.error(err) : console.log('Directory created successfully!'));
-  makeFiles(html, js, css);
+  makeFiles(fileChoice, moduleName);
 };
 
-function makeFiles(html, js, css) {
-  for (const value of arguments) {
-    if (value) {
-      fs.writeFile(path.join(__dirname, `placeholder.${value}`), (err) => {
-        if (err) {
-          return console.error(err);
-        }
-        console.log(`${value} has been created`);
-      });
+function makeFiles(fileChoice, moduleName) {
+  data = '';
+
+  for (const value of fileChoice) {
+    switch (value) {
+      case 'html':
+        fs.writeFile(`./fivem-${moduleName}/default.html`, data, (err) => {
+          if (err)
+            console.log(err);
+          else {
+            console.log("File written successfully\n");
+          }
+        });
+        break;
+      case 'css':
+        fs.writeFile(`./fivem-${moduleName}/default.css`, data, (err) => {
+          if (err)
+            console.log(err);
+          else {
+            console.log("File written successfully\n");
+          }
+        });
+        break;
+      case 'js':
+        fs.writeFile(`./fivem-${moduleName}/default.js`, data, (err) => {
+          if (err)
+            console.log(err);
+          else {
+            console.log("File written successfully\n");
+          }
+        });
+        break;
     }
   }
-};
+}
+
+
+
+
+
+
+
+
+
+/* for (const value of arguments) {
+  if (value) {
+    fs.writeFile(path.join(__dirname, `placeholder.${value}`), (err) => {
+      if (err) {
+        return console.error(err);
+      }
+      console.log(`${value} has been created`);
+    });
+  }
+}
+}; */
 
 
 
