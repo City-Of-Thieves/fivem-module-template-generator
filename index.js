@@ -7,7 +7,6 @@ function init() {
   defaultRouting();
 };
 
-
 function defaultRouting() {
 
   inquirer
@@ -95,28 +94,5 @@ function makeFiles(fileChoice, moduleName) {
     }
   }
 }
-
-
-
-
-
-
-
-
-
-/* for (const value of arguments) {
-  if (value) {
-    fs.writeFile(path.join(__dirname, `placeholder.${value}`), (err) => {
-      if (err) {
-        return console.error(err);
-      }
-      console.log(`${value} has been created`);
-    });
-  }
-}
-}; */
-
-
-
 
 init();
