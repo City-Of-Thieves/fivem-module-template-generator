@@ -73,30 +73,22 @@ function customize() {
 
 function makeDirectoryPath(answers) {
   const { html, js, css } = answers;
-  fs.mkdir(path.join(__dirname, `fivem-${answers.moduleName}`), (err) => {
-    if (err) {
-      return console.error(err);
-    }
-    console.log('Directory created successfully!');
-  });
+  fs.mkdir(path.join(__dirname, `fivem-${answers.moduleName}`), err => err ? console.error(err) : console.log('Directory created successfully!'));
   makeFiles(html, js, css);
 };
 
 function makeFiles(html, js, css) {
-
-  for (let i = 0; i < arguments.length; i++) {
-    if (i) console.log('tesst')
-  }
-
-
-
-  /* fs.writeFile(path.join(__dirname, `test.js`), (err) => {
-    if (err) {
-      return console.error(err);
+  for (const value of arguments) {
+    if (value) {
+      fs.writeFile(path.join(__dirname, `placeholder.${value}`), (err) => {
+        if (err) {
+          return console.error(err);
+        }
+        console.log(`${value} has been created`);
+      });
     }
-    console.log('File created successfully!');
-  }); */
-}
+  }
+};
 
 
 
