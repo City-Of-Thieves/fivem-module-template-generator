@@ -1,0 +1,1 @@
+# fivem-module-template-generator
