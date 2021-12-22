@@ -62,11 +62,11 @@ function makeDirectoryPath(answers) {
 };
 
 function makeFiles(fileChoice, moduleName) {
+  data = dataForHTML(fileChoice);
 
   for (const value of fileChoice) {
     switch (value) {
       case 'html':
-        data = dataForHTML(fileChoice);
         fs.writeFile(`./fivem-${moduleName}/index.html`, data, (err) => {
           if (err)
             console.log(err);
@@ -76,7 +76,7 @@ function makeFiles(fileChoice, moduleName) {
         });
         break;
       case 'css':
-        fs.writeFile(`./fivem-${moduleName}/default.css`, data, (err) => {
+        fs.writeFile(`./fivem-${moduleName}/default.css`, '', (err) => {
           if (err)
             console.log(err);
           else {
@@ -85,7 +85,7 @@ function makeFiles(fileChoice, moduleName) {
         });
         break;
       case 'js':
-        fs.writeFile(`./fivem-${moduleName}/default.js`, data, (err) => {
+        fs.writeFile(`./fivem-${moduleName}/default.js`, '', (err) => {
           if (err)
             console.log(err);
           else {
