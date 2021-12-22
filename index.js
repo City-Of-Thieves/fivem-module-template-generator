@@ -1,6 +1,8 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
 const path = require('path');
+const htmlTemplate = require('./helpers/getDatafromTemplates');
+const dataForHTML = require('./helpers/getDatafromTemplates');
 
 
 function init() {
@@ -14,7 +16,7 @@ function defaultRouting() {
       {
         type: 'list',
         message: 'How would you like to start?',
-        choices: ['Blank template', 'I would like to customize my template'],
+        choices: ['I would like to customize my template', 'Blank template'],
         name: 'defaultYN',
       },
     ])
@@ -60,12 +62,12 @@ function makeDirectoryPath(answers) {
 };
 
 function makeFiles(fileChoice, moduleName) {
-  data = '';
 
   for (const value of fileChoice) {
     switch (value) {
       case 'html':
-        fs.writeFile(`./fivem-${moduleName}/default.html`, data, (err) => {
+        data = dataForHTML(fileChoice);
+        fs.writeFile(`./fivem-${moduleName}/index.html`, data, (err) => {
           if (err)
             console.log(err);
           else {
