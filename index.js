@@ -57,7 +57,7 @@ function customize() {
 
 function makeDirectoryPath(answers) {
   const { fileChoice, moduleName } = answers
-  fs.mkdir(path.join(__dirname, `fivem-${answers.moduleName}`), err => err ? console.error(err) : console.log('Directory created successfully!'));
+  fs.mkdir(path.join(__dirname, `fivem-${answers.moduleName}`), err => err ? console.error(err) : console.log('Directory created successfully!\n'));
   makeFiles(fileChoice, moduleName);
 };
 
@@ -71,25 +71,25 @@ function makeFiles(fileChoice, moduleName) {
           if (err)
             console.log(err);
           else {
-            console.log("File written successfully\n");
+            console.log("HTML file created successfully\n");
           }
         });
         break;
       case 'css':
-        fs.writeFile(`./fivem-${moduleName}/default.css`, '', (err) => {
+        fs.writeFile(`./fivem-${moduleName}/style.css`, '', (err) => {
           if (err)
             console.log(err);
           else {
-            console.log("File written successfully\n");
+            console.log("CSS file created successfully\n");
           }
         });
         break;
       case 'js':
-        fs.writeFile(`./fivem-${moduleName}/default.js`, '', (err) => {
+        fs.writeFile(`./fivem-${moduleName}/script.js`, '', (err) => {
           if (err)
             console.log(err);
           else {
-            console.log("File written successfully\n");
+            console.log("Javascript file created successfully\n");
           }
         });
         break;
