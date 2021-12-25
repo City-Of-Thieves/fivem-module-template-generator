@@ -64,6 +64,7 @@ function makeDirectoryPath(answers) {
 function makeFiles(fileChoice, moduleName) {
   data = dataForHTML(fileChoice);
 
+
   for (const value of fileChoice) {
     switch (value) {
       case 'html':
@@ -95,6 +96,11 @@ function makeFiles(fileChoice, moduleName) {
         break;
     }
   }
+}
+
+
+function blankTemplate() {
+  
 }
 
 init();
