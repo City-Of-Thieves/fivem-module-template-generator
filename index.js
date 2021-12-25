@@ -1,7 +1,7 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
 const path = require('path');
-const {dataForHTML , dataforLua} = require('./helpers/getDatafromTemplates');
+const {dataForHTML , dataforLua , dataforGitIgnore} = require('./helpers/getDatafromTemplates');
 
 
 
@@ -36,15 +36,49 @@ function customize() {
     })
 }
 
+/* function checkName(moduleName) {
+  let updatedName = moduleName.split(' ').join('-');
+  return updatedName;
+} */
+
 function makeDirectoryPath(answers) {
   const { fileChoice, moduleName } = answers
-  fs.mkdir(path.join(__dirname, `fivem-${answers.moduleName}`), err => err ? console.error(err) : console.log('Directory created successfully!\n'));
-  makeFiles(fileChoice, moduleName);
+  let updatedName = answers.moduleName.replaceAll(' ', '-');
+
+  fs.mkdir(path.join(__dirname, `fivem-${updatedName}`), err => err ? console.error(err) : console.log('Directory created successfully!\n'));
+  createDefaultFiles(updatedName)
+  makeCustomFiles(fileChoice, updatedName);
 };
 
-function makeFiles(fileChoice, moduleName) {
-  htmlData = dataForHTML(fileChoice);
+function createDefaultFiles(moduleName) {
   luaData = dataforLua();
+  gitIgnoreData = dataforGitIgnore();
+
+  fs.writeFile(`./fivem-${moduleName}/fxmanifest.lua`, luaData, (err) => {
+    if (err)
+      console.log(err);
+    else {
+      console.log("Manifest file created\n");
+    }
+  });
+  fs.writeFile(`./fivem-${moduleName}/README.md`, '', (err) => {
+    if (err)
+      console.log(err);
+    else {
+      console.log("Readme generated\n");
+    }
+  });
+  fs.writeFile(`./fivem-${moduleName}/.gitignore`, gitIgnoreData, (err) => {
+    if (err)
+      console.log(err);
+    else {
+      console.log(".gitignore created\n");
+    }
+  });
+}
+
+function makeCustomFiles(fileChoice, moduleName) {
+  htmlData = dataForHTML(fileChoice);
   
   for (const value of fileChoice) {
     switch (value) {
@@ -78,20 +112,6 @@ function makeFiles(fileChoice, moduleName) {
         break;
     }
   }
-  fs.writeFile(`./fivem-${moduleName}/fxmanifest.lua`, luaData, (err) => {
-    if (err)
-      console.log(err);
-    else {
-      console.log("Manifest file created\n");
-    }
-  });
-  fs.writeFile(`./fivem-${moduleName}/README.md`, '', (err) => {
-    if (err)
-      console.log(err);
-    else {
-      console.log("Readme generated\n");
-    }
-  });
 }
 
 function includeCSS(filename) {
