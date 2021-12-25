@@ -6,10 +6,13 @@ const dataForHTML = (fileChoice) => {
         return fs.readFileSync(path.join(__dirname, '../templates/html/index.html'))
     }
 }
+const dataforLua = (fileChoice) => {
+        return fs.readFileSync(path.join(__dirname, '../templates/fxmanifest.lua'))
+}
 
 
 
-module.exports = dataForHTML;
+module.exports = {dataForHTML , dataforLua};
 
 
 
