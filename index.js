@@ -45,7 +45,7 @@ function makeDirectoryPath(answers) {
   const { fileChoice, moduleName } = answers
   let updatedName = answers.moduleName.replaceAll(' ', '-');
 
-  fs.mkdir(path.join(__dirname, `fivem-${updatedName}`), err => err ? console.error(err) : console.log('Directory created successfully!\n'));
+  fs.mkdir(path.join(__dirname, `fivem-${updatedName}`), err => err ? console.error(err) : console.log('Your directory has been created!\n'));
   createDefaultFiles(updatedName)
   makeCustomFiles(fileChoice, updatedName);
 };
@@ -65,14 +65,14 @@ function createDefaultFiles(moduleName) {
     if (err)
       console.log(err);
     else {
-      console.log("Readme generated\n");
+      console.log("Readme file generated\n");
     }
   });
   fs.writeFile(`./fivem-${moduleName}/.gitignore`, gitIgnoreData, (err) => {
     if (err)
       console.log(err);
     else {
-      console.log(".gitignore created\n");
+      console.log(".gitignore file created\n");
     }
   });
 }
@@ -88,44 +88,30 @@ function makeCustomFiles(fileChoice, moduleName) {
           if (err)
             console.log(err);
           else {
-            console.log("HTML file created successfully\n");
+            console.log("HTML file created\n");
           }
         });
         break;
       case 'css':
-        fs.writeFile(`./fivem-${moduleName}/style.css`, '', (err) => {
+        fs.writeFile(`./fivem-${moduleName}/html/style.css`, '', (err) => {
           if (err)
             console.log(err);
           else {
-            console.log("CSS file created successfully\n");
+            console.log("CSS file created\n");
           }
         });
         break;
       case 'script':
-        fs.writeFile(`./fivem-${moduleName}/script.js`, '', (err) => {
+        fs.writeFile(`./fivem-${moduleName}/html/script.js`, '', (err) => {
           if (err)
             console.log(err);
           else {
-            console.log("Scripting file created successfully\n");
+            console.log("Scripting file created\n");
           }
         });
         break;
     }
   }
-}
-
-function includeCSS(filename) {
-    let file = document.createElement("link");
-    file.setAttribute("rel", "stylesheet");
-    file.setAttribute("type", "text/css");
-    file.setAttribute("href", filename);
-    document.head.appendChild(file);
- }
-
- function includeScript(filename) {
-  let file = document.createElement("link");
-  file.setAttribute("src", filename);
-  document.body.appendChild(file);
 }
 
 function blankTemplate() {
