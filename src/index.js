@@ -32,6 +32,7 @@ async function collectModuleInfo() {
 	let prompts = [];
 	prompts.push(getInquirierPrompt('input', 'What is the name of the module?', 'moduleName'));
 	prompts.push(getInquirierPrompt('list', 'What language will you be coding in', 'language', ['javascript', 'lua', 'C#']));
+	prompts.push(getInquirierPrompt('checkbox', 'What type of scripts will you need', 'scriptTypes', ['client', 'server']));
 	prompts.push(getInquirierPrompt('checkbox', 'What additional files will you need created?', 'fileChoice', ['html', 'css', 'script']));
 
 	return await inquirer.prompt(prompts);
