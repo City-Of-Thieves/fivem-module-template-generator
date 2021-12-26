@@ -1,4 +1,29 @@
 {
+  "name": "fivem-module-template-generator",
+  "version": "1.0.0",
+  "description": "Generate module templates for GTA V five m servers",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/City-Of-Thieves/fivem-module-template-generator.git"
+  },
+  "keywords": [
+    "fivem",
+    "gta",
+    "gtav",
+    "javascript",
+    "lua",
+    "template"
+  ],
+  "author": "Jesse M",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/City-Of-Thieves/fivem-module-template-generator/issues"
+  },
+  "homepage": "https://github.com/City-Of-Thieves/fivem-module-template-generator#readme",
   "dependencies": {
     "inquirer": "^8.2.0"
   }
