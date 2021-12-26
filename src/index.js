@@ -3,8 +3,6 @@ const fs = require('fs');
 const path = require('path');
 const {dataForHTML , dataforLua , dataforGitIgnore} = require('./helpers/getDatafromTemplates');
 
-
-
 function init() {
   customize();
 };
@@ -36,6 +34,7 @@ function customize() {
     })
 }
 
+// TODO: Remove me
 /* function checkName(moduleName) {
   let updatedName = moduleName.split(' ').join('-');
   return updatedName;
@@ -45,7 +44,7 @@ function makeDirectoryPath(answers) {
   const { fileChoice, moduleName } = answers
   let updatedName = answers.moduleName.replaceAll(' ', '-');
 
-  fs.mkdir(path.join(__dirname, `fivem-${updatedName}`), err => err ? console.error(err) : console.log('Your directory has been created!\n'));
+  fs.mkdir(path.join(__dirname, `../output/fivem-${updatedName}`), err => err ? console.error(err) : console.log('Your directory has been created!\n'));
   createDefaultFiles(updatedName)
   makeCustomFiles(fileChoice, updatedName);
 };
@@ -54,21 +53,21 @@ function createDefaultFiles(moduleName) {
   luaData = dataforLua();
   gitIgnoreData = dataforGitIgnore();
 
-  fs.writeFile(`./fivem-${moduleName}/fxmanifest.lua`, luaData, (err) => {
+  fs.writeFile(path.join(__dirname, `../output/fivem-${moduleName}/fxmanifest.lua`), luaData, (err) => {
     if (err)
       console.log(err);
     else {
       console.log("Manifest file created\n");
     }
   });
-  fs.writeFile(`./fivem-${moduleName}/README.md`, '', (err) => {
+  fs.writeFile(path.join(__dirname, `../output/fivem-${moduleName}/README.md`), '', (err) => {
     if (err)
       console.log(err);
     else {
       console.log("Readme file generated\n");
     }
   });
-  fs.writeFile(`./fivem-${moduleName}/.gitignore`, gitIgnoreData, (err) => {
+  fs.writeFile(path.join(__dirname, `../output/fivem-${moduleName}/.gitignore`), gitIgnoreData, (err) => {
     if (err)
       console.log(err);
     else {
