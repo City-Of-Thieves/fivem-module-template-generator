@@ -1,5 +1,6 @@
 const inquirer = require('inquirer');
 const FileHelper = require(`${__dirname}/helpers/FileHelper`);
+const PromptHelper = require(`${__dirname}/helpers/PromptHelper`);
 
 async function createModule() {
 	try {
@@ -14,28 +15,8 @@ async function createModule() {
 	}
 }
 
-function getInquirierPrompt(type, message, name, choices=null) {
-	let prompt = {
-		type: type,
-		message: message,
-		name: name,
-	};
-
-	if (Array.isArray(choices)) {
-		prompt.choices = choices;
-	}
-
-	return prompt;
-}
-
 async function collectModuleInfo() {
-	let prompts = [];
-	prompts.push(getInquirierPrompt('input', 'What is the name of the module?', 'moduleName'));
-	prompts.push(getInquirierPrompt('list', 'What language will you be coding in', 'language', ['javascript', 'lua', 'C#']));
-	prompts.push(getInquirierPrompt('checkbox', 'What type of scripts will you need', 'scriptTypes', ['client', 'server']));
-	prompts.push(getInquirierPrompt('checkbox', 'What additional files will you need created?', 'fileChoice', ['html', 'css', 'script']));
-
-	return await inquirer.prompt(prompts);
+	return await inquirer.prompt(PromptHelper.getAll());
 }
 
 createModule();
