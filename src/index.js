@@ -4,7 +4,6 @@ const PromptHelper = require(`${__dirname}/helpers/PromptHelper`);
 const FileNameHelper = require(`${__dirname}/helpers/FileNameHelper`);
 const LanguageHelper = require(`${__dirname}/helpers/LanguageHelper`);
 
-// TODO: Need to add the other supported languages
 async function createModule() {
 	try {
 		let moduleInfo = await inquirer.prompt(PromptHelper.getAll());
