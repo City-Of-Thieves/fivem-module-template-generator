@@ -35,8 +35,8 @@ class TemplateHelper {
     static swapHtmlTemplates(fileContent, moduleInfo) {
         let fileContentString = fileContent.toString();
         
-        fileContentString = fileContentString.replace('{INCLUDE_CSS}', moduleInfo.fileChoice.includes('css') ? '<link rel="stylesheet" href="html/index.css" />' : '');
-        fileContentString = fileContentString.replace('{INCLUDE_SCRIPT}', moduleInfo.fileChoice.includes('script') ? '<script src="html/script.js" />' : '');
+        fileContentString = fileContentString.replace('{INCLUDE_CSS}', moduleInfo.fileChoice.includes('css') ? '<link rel="stylesheet" href="index.css" />' : '');
+        fileContentString = fileContentString.replace('{INCLUDE_SCRIPT}', moduleInfo.fileChoice.includes('script') ? '<script src="script.js"></script>' : '');
 
         return fileContentString;
     }
